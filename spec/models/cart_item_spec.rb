@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
-  it "每個 Cart Item 都可以計算它自己的金額(小計)" do
-    p1 = Product.create(title:"七龍珠", price: 80)      # 建立商品 1
-    p2 = Product.create(title:"冒險野郎", price: 200)   # 建立商品 2
+  let(:cart) { Cart.new }
+  let(:p1) { create(:product, :dragonball, price: 80) }
+  let(:p2) { create(:product, :jojo, price: 200) }
 
-    cart = Cart.new
+  it "每個 Cart Item 都可以計算它自己的金額(小計)" do
     3.times { cart.add_item(p1.id) }  # 加 3 次商品 1
     4.times { cart.add_item(p2.id) }  # 加 4 次商品 2
     2.times { cart.add_item(p1.id) }  # 再加 2 次商品 1
